@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { TextField, Button, Typography, Paper } from "@material-ui/core";
 import FileBase from "react-file-base64";
+import { useDispatch } from "react-redux";
 
 import useStyles from "./styles";
+import { createPost } from "../../actions/posts";
 const Form = () => {
   const [postData, setPostData] = useState({
     creator: "",
@@ -12,8 +14,12 @@ const Form = () => {
     imageUrl: "",
   });
   const classes = useStyles();
+  const dispatch = useDispatch();
 
-  const handleSubmit = () => {};
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(createPost(postData));
+  };
   const clear = () => {};
 
   return (
@@ -29,7 +35,7 @@ const Form = () => {
           name="creator"
           variant="outlined"
           label="Creator"
-          fullwidth
+          fullWidth
           value={postData.creator}
           onChange={(e) =>
             setPostData({ ...postData, creator: e.target.value })
@@ -39,7 +45,7 @@ const Form = () => {
           name="title"
           variant="outlined"
           label="title"
-          fullwidth
+          fullWidth
           value={postData.title}
           onChange={(e) => setPostData({ ...postData, title: e.target.value })}
         />
@@ -47,7 +53,7 @@ const Form = () => {
           name="synopsis"
           variant="outlined"
           label="synopsis"
-          fullwidth
+          fullWidth
           value={postData.synopsis}
           onChange={(e) =>
             setPostData({ ...postData, synopsis: e.target.value })
@@ -57,7 +63,7 @@ const Form = () => {
           name="tags"
           variant="outlined"
           label="tags"
-          fullwidth
+          fullWidth
           value={postData.tags}
           onChange={(e) => setPostData({ ...postData, tags: e.target.value })}
         />
@@ -65,7 +71,7 @@ const Form = () => {
           <FileBase
             type="file"
             multiple={false}
-            onDone={([base64]) =>
+            onDone={({ base64 }) =>
               setPostData({ ...postData, imageUrl: base64 })
             }
           />
