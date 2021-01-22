@@ -17,7 +17,7 @@ app.use(cors());
 app.use("/posts", postRoutes);
 
 app.get("/", (req, res) => {
-  res.send("Hello to Moviegram 10000!");
+  res.send("Hello to Moviegram 10000 API");
 });
 
 const PORT = process.env.PORT || 5000;
