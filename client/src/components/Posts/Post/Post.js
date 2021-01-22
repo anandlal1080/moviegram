@@ -9,12 +9,21 @@ import {
 } from "@material-ui/core";
 import ThumbDownAltIcon from "@material-ui/icons/ThumbDownAlt";
 import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
+import VisibilityIcon from "@material-ui/icons/Visibility";
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
 import useStyles from "./styles";
+import { useDispatch } from "react-redux";
+import {
+  deletePost,
+  likePost,
+  dislikePost,
+  watchPost,
+} from "../../../actions/posts";
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
+  const dispatch = useDispatch();
 
   return (
     <Card className={classes.card}>
@@ -47,24 +56,44 @@ const Post = ({ post, setCurrentId }) => {
         {post.title}
       </Typography>
       <CardContent>
-        <Typography variant="h5" gutterBottom>
+        <Typography variant="body2" color="textSecondary" gutterBottom>
           {post.synopsis}
         </Typography>
       </CardContent>
       <CardActions className={classes.cardActions}>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(likePost(post._id))}
+        >
           <ThumbUpAltIcon fontSize="small" />
-          Like
+
           {post.likeCount}
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(dislikePost(post._id))}
+        >
           <ThumbDownAltIcon fontSize="small" />
-          Dislike
+
           {post.dislikeCount}
         </Button>
-        <Button size="small" color="primary" onClick={() => {}}>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(watchPost(post._id))}
+        >
+          <VisibilityIcon fontSize="small" />
+
+          {post.watchCount}
+        </Button>
+        <Button
+          size="small"
+          color="primary"
+          onClick={() => dispatch(deletePost(post._id))}
+        >
           <DeleteIcon fontSize="small" />
-          Delete
         </Button>
       </CardActions>
     </Card>
