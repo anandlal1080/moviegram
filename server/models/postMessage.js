@@ -6,17 +6,17 @@ const postSchema = mongoose.Schema({
   creator: String,
   tags: [String],
   imageUrl: String,
-  likeCount: {
-    type: Number,
-    default: 0,
+  likes: {
+    type: [String],
+    default: [],
   },
-  dislikeCount: {
-    type: Number,
-    default: 0,
+  dislikes: {
+    type: [String],
+    default: [],
   },
-  watchCount: {
-    type: Number,
-    default: 0,
+  watch: {
+    type: [String],
+    default: [],
   },
   createdAt: {
     type: Date,
