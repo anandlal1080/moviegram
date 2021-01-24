@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { TextField, Button, Typography, Paper } from "@material-ui/core";
+import { TextField, Button, Typography, Paper, List } from "@material-ui/core";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import Divider from "@material-ui/core/Divider";
 import FileBase from "react-file-base64";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -12,6 +15,7 @@ const Form = ({ currentId, setCurrentId }) => {
     tags: "",
     imageUrl: "",
   });
+
   const post = useSelector((state) =>
     currentId ? state.posts.find((p) => p._id === currentId) : null
   );

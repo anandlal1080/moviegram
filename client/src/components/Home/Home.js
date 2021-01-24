@@ -5,6 +5,7 @@ import { useDispatch } from "react-redux";
 import { getPosts } from "../../actions/posts";
 import Posts from "../Posts/Posts";
 import Form from "../Form/Form";
+import MovieSearch from "../Search/movieSearch";
 
 const Home = () => {
   const [currentId, setCurrentId] = useState(0);
@@ -27,6 +28,7 @@ const Home = () => {
             <Posts setCurrentId={setCurrentId} />
           </Grid>
           <Grid item xs={12} sm={4}>
+            <MovieSearch currentId={currentId} setCurrentId={setCurrentId} />
             <Form currentId={currentId} setCurrentId={setCurrentId} />
           </Grid>
         </Grid>
