@@ -5,7 +5,7 @@ import ListItemText from "@material-ui/core/ListItemText";
 
 import { useStoreContext } from "../../reducers/search";
 import { useDispatch } from "react-redux";
-import { API_CALL } from "../../constants/actionTypes";
+import { API_CALL, CLEAR_SEARCH } from "../../constants/actionTypes";
 
 import useStyles from "./styles";
 import { createPost } from "../../actions/posts";
@@ -79,6 +79,9 @@ const MovieSearch = ({ currentId, setCurrentId }) => {
       tags: "",
       imageUrl: "",
     });
+    apiDispatch({
+      type: CLEAR_SEARCH,
+    });
   };
 
   if (!user?.result?.name) {
@@ -120,6 +123,15 @@ const MovieSearch = ({ currentId, setCurrentId }) => {
           fullWidth
         >
           Submit
+        </Button>
+        <Button
+          variant="contained"
+          color="secondary"
+          size="small"
+          onClick={clear}
+          fullWidth
+        >
+          Clear
         </Button>
       </form>
       <List
