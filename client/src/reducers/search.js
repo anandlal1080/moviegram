@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext } from "react";
-import { API_CALL } from "../constants/actionTypes";
+import { API_CALL, CLEAR_SEARCH } from "../constants/actionTypes";
 
 const StoreContext = createContext();
 const { Provider } = StoreContext;
@@ -8,11 +8,16 @@ const reducer = (state, action) => {
   switch (action.type) {
     case API_CALL:
       console.log(action.payload);
+
       return {
         ...state,
         searchResults: action.payload.Search,
       };
-
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        searchResults: [],
+      };
     default:
       return state;
   }

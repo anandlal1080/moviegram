@@ -5,14 +5,21 @@ import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
 import useStyles from "./styles";
 import icon from "../../images/movie-night.png";
+import { useStoreContext } from "../../reducers/search";
+import { CLEAR_SEARCH } from "../../constants/actionTypes";
 
 const Navbar = () => {
+  const [state, clearState] = useStoreContext();
   const classes = useStyles();
   const [user, setUser] = useState(JSON.parse(localStorage.getItem("profile")));
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
   const logout = () => {
+    clearState({
+      type: CLEAR_SEARCH,
+    });
+
     dispatch({ type: "LOGOUT" });
     history.push("/");
 

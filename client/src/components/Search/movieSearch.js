@@ -2,25 +2,32 @@ import React, { useState, useEffect } from "react";
 import { TextField, Button, Typography, Paper, List } from "@material-ui/core";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import Divider from "@material-ui/core/Divider";
+
 import { useStoreContext } from "../../reducers/search";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { API_CALL } from "../../constants/actionTypes";
 
 import useStyles from "./styles";
-import { createPost, updatePost } from "../../actions/posts";
+import { createPost } from "../../actions/posts";
 
-const MovieSearch = () => {
+const MovieSearch = ({ currentId, setCurrentId }) => {
   const user = JSON.parse(localStorage.getItem("profile"));
   const classes = useStyles();
-  const [state, dispatch] = useStoreContext();
+  const dispatch = useDispatch();
+  const [state, apiDispatch] = useStoreContext();
   const [movieName, setmovieName] = useState({
     title: "",
+  });
+  const [postData, setPostData] = useState({
+    title: "",
+    synopsis: "",
+    tags: "",
+    imageUrl: "",
   });
 
   const Base_URL = "https://www.omdbapi.com/?apikey=461e66e0&s=";
   const Title_URL = "https://www.omdbapi.com/?apikey=461e66e0&i=";
-  let searchResults = [];
+
   const handleApiSubmit = (e) => {
     e.preventDefault();
     const query = Base_URL + movieName.title;
@@ -30,7 +37,7 @@ const MovieSearch = () => {
       .then((data) => {
         console.log(data);
         if (data.Search.length > 0) {
-          dispatch({
+          apiDispatch({
             type: API_CALL,
             payload: data,
           });
@@ -48,18 +55,30 @@ const MovieSearch = () => {
     fetch(query)
       .then((data) => data.json())
       .then((data) => {
-        console.log(state);
-        // if (data.Search.length > 0) {
-        //   dispatch({
-        //     type: API_CALL,
-        //     payload: data,
-        //   });
-        // }
-        // console.log(state);
+        if (currentId === 0) {
+          const postData2 = {
+            title: data.Title,
+            synopsis: data.Plot,
+            tags: data.Genre.split(", "),
+            imageUrl: data.Poster,
+          };
+
+          dispatch(createPost({ ...postData2, name: user?.result?.name }));
+          clear();
+        }
       })
       .catch((err) => console.log(err));
 
     setmovieName({ title: "" });
+  };
+  const clear = () => {
+    setCurrentId(0);
+    setPostData({
+      title: "",
+      synopsis: "",
+      tags: "",
+      imageUrl: "",
+    });
   };
 
   if (!user?.result?.name) {
