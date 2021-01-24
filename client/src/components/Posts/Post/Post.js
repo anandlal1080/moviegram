@@ -7,9 +7,7 @@ import {
   Button,
   Typography,
 } from "@material-ui/core";
-import ThumbDownAltIcon from "@material-ui/icons/ThumbDownAlt";
-import ThumbUpAltIcon from "@material-ui/icons/ThumbUpAlt";
-import VisibilityIcon from "@material-ui/icons/Visibility";
+
 import DeleteIcon from "@material-ui/icons/Delete";
 import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
 import moment from "moment";
@@ -21,9 +19,11 @@ import {
   dislikePost,
   watchPost,
 } from "../../../actions/posts";
+import { Likes, DisLikes, Watches } from "./Reactions.js";
 const Post = ({ post, setCurrentId }) => {
   const classes = useStyles();
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem("profile"));
 
   return (
     <Card className={classes.card}>
@@ -64,29 +64,26 @@ const Post = ({ post, setCurrentId }) => {
         <Button
           size="small"
           color="primary"
+          disabled={!user?.result}
           onClick={() => dispatch(likePost(post._id))}
         >
-          <ThumbUpAltIcon fontSize="small" />
-
-          {post.likeCount}
+          <Likes post={post} user={user} />
         </Button>
         <Button
           size="small"
           color="primary"
+          disabled={!user?.result}
           onClick={() => dispatch(dislikePost(post._id))}
         >
-          <ThumbDownAltIcon fontSize="small" />
-
-          {post.dislikeCount}
+          <DisLikes post={post} user={user} />
         </Button>
         <Button
           size="small"
           color="primary"
+          disabled={!user?.result}
           onClick={() => dispatch(watchPost(post._id))}
         >
-          <VisibilityIcon fontSize="small" />
-
-          {post.watchCount}
+          <Watches post={post} user={user} />
         </Button>
         <Button
           size="small"
