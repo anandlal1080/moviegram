@@ -1,9 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { AppBar, Avatar, Button, Typography, Toolbar } from "@material-ui/core";
+import {
+  AppBar,
+  Avatar,
+  Button,
+  Typography,
+  CardActions,
+  Toolbar,
+} from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import decode from "jwt-decode";
 import useStyles from "./styles";
+import { Likes, DisLikes, Watches } from "./Reactions.js";
+
 import icon from "../../images/movie-night.png";
 import { useStoreContext } from "../../reducers/search";
 import { CLEAR_SEARCH } from "../../constants/actionTypes";
@@ -54,6 +63,29 @@ const Navbar = () => {
       <Toolbar className={classes.toolbar}>
         {user ? (
           <div className={classes.profile}>
+            <CardActions className={classes.cardActions}>
+              <Button
+                size="small"
+                color="primary"
+                // onClick={() => dispatch(findLikedPosts(user._id))}
+              >
+                <Likes user={user} />
+              </Button>
+              <Button
+                size="small"
+                color="primary"
+                // onClick={() => dispatch(dislikePost(post._id))}
+              >
+                <DisLikes user={user} />
+              </Button>
+              <Button
+                size="small"
+                color="primary"
+                // onClick={() => dispatch(watchPost(post._id))}
+              >
+                <Watches user={user} />
+              </Button>
+            </CardActions>
             <Avatar
               className={classes.purple}
               alt={user.result.name}
