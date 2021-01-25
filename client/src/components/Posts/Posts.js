@@ -5,6 +5,7 @@ import Post from "./Post/Post";
 import useStyles from "./styles";
 const Posts = ({ setCurrentId }) => {
   const posts = useSelector((state) => state.posts);
+  posts.sort((a, b) => (a._id > b._id ? 1 : b._id > a._id ? -1 : 0)).reverse();
   const classes = useStyles();
 
   return !posts.length ? (
