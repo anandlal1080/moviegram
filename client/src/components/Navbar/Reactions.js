@@ -5,74 +5,33 @@ import ThumbDownAltOutlined from "@material-ui/icons/ThumbDownAltOutlined";
 import VisibilityOutlinedIcon from "@material-ui/icons/VisibilityOutlined";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 
-export const Likes = ({ post, user }) => {
-  //   if (post.likes.length > 0) {
-  //     return post.likes.find(
-  //       (like) => like === (user?.result?.googleId || user?.result?._id)
-  //     ) ? (
-  //       <>
-  //         <ThumbUpAltIcon fontSize="small" />
-  //         &nbsp;
-  //         {post.likes.length}
-  //       </>
-  //     ) : (
-  //       <>
-  //         <ThumbUpAltOutlined fontSize="small" />
-  //         &nbsp;{post.likes.length}
-  //       </>
-  //     );
-  //   }
-  return (
-    <>
-      <ThumbUpAltOutlined fontSize="small" />
-    </>
-  );
+export const Likes = ({ likecounter }) => {
+  if (likecounter % 2 === 0) {
+    likecounter = likecounter + 1;
+    return <ThumbUpAltOutlined fontSize="small" />;
+  } else {
+    likecounter = likecounter + 1;
+    return <ThumbUpAltIcon fontSize="small" />;
+  }
 };
 
-export const DisLikes = ({ post, user }) => {
-  //   if (post.dislikes.length > 0) {
-  //     return post.dislikes.find(
-  //       (dislike) => dislike === (user?.result?.googleId || user?.result?._id)
-  //     ) ? (
-  //       <>
-  //         <ThumbDownAltIcon fontSize="small" />
-  //         &nbsp;
-  //         {post.dislikes.length}
-  //       </>
-  //     ) : (
-  //       <>
-  //         <ThumbDownAltOutlined fontSize="small" />
-  //         &nbsp;{post.dislikes.length}
-  //       </>
-  //     );
-  //   }
-  return (
-    <>
-      <ThumbDownAltOutlined fontSize="small" />
-    </>
-  );
+export const DisLikes = ({ disLikecounter }) => {
+  if (disLikecounter % 2 === 0) {
+    disLikecounter = disLikecounter + 1;
+    return <ThumbDownAltOutlined fontSize="small" />;
+  } else {
+    disLikecounter = disLikecounter + 1;
+    return <ThumbDownAltIcon fontSize="small" />;
+  }
 };
 
-export const Watches = ({ post, user }) => {
-  //   if (post.watch.length > 0) {
-  //     return post.watch.find(
-  //       (watch) => watch === (user?.result?.googleId || user?.result?._id)
-  //     ) ? (
-  //       <>
-  //         <VisibilityIcon fontSize="small" />
-  //         &nbsp;
-  //         {post.watch.length}
-  //       </>
-  //     ) : (
-  //       <>
-  //         <VisibilityOutlinedIcon fontSize="small" />
-  //         &nbsp;{post.watch.length}
-  //       </>
-  //     );
-  //   }
-  return (
-    <>
-      <VisibilityOutlinedIcon fontSize="small" />
-    </>
-  );
+export const Watches = ({ watchcounter }) => {
+  if (watchcounter % 2 === 0) {
+    watchcounter = watchcounter + 1;
+    return <VisibilityOutlinedIcon fontSize="small" />;
+  } else {
+    watchcounter = watchcounter + 1;
+
+    return <VisibilityIcon fontSize="small" />;
+  }
 };

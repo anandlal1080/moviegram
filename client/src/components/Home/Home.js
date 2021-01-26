@@ -13,6 +13,7 @@ const Home = () => {
   useEffect(() => {
     dispatch(getPosts());
   }, [currentId, dispatch]);
+
   return (
     <div>
       <Grow in>
@@ -22,12 +23,13 @@ const Home = () => {
             justify="space-between"
             alignItems="stretch"
             spacing={3}
+            overflow="hidden"
             className={classes.mainContainer}
           >
-            <Grid item xs={12} sm={7}>
+            <Grid item xs={12} md={7}>
               <Posts setCurrentId={setCurrentId} />
             </Grid>
-            <Grid item xs={12} sm={4}>
+            <Grid item xs={12} md={4}>
               <MovieSearch currentId={currentId} setCurrentId={setCurrentId} />
               <Form currentId={currentId} setCurrentId={setCurrentId} />
             </Grid>

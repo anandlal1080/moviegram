@@ -6,7 +6,7 @@ export default makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
     width: "100%",
-    maxWidth: 360,
+    maxWidth: "100%",
     backgroundColor: theme.palette.background.paper,
   },
   paper: {
@@ -23,5 +23,8 @@ export default makeStyles((theme) => ({
   },
   buttonSubmit: {
     marginBottom: 10,
+  },
+  empty: {
+    display: "none",
   },
 }));

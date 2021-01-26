@@ -19,14 +19,14 @@ export default makeStyles((theme) => ({
     marginLeft: "15px",
   },
   toolbar: {
-    display: "flex",
-    justifyContent: "flex-end",
-    width: "600px",
+    // display: "flex",
+    // justifyContent: "flex-end",
+    width: "100%",
   },
   profile: {
     display: "flex",
     justifyContent: "space-between",
-    width: "600px",
+    width: "100%",
   },
   userName: {
     display: "flex",
@@ -39,5 +39,17 @@ export default makeStyles((theme) => ({
   purple: {
     color: theme.palette.getContrastText(deepPurple[500]),
     backgroundColor: deepPurple[500],
+  },
+  [theme.breakpoints.down("md")]: {
+    appBar: {
+      flexDirection: "column",
+    },
+  },
+  [theme.breakpoints.down("xs")]: {
+    profile: {
+      flexDirection: "column",
+      display: "flex",
+      justifyContent: "space-between",
+    },
   },
 }));

@@ -38,15 +38,6 @@ const Form = ({ currentId, setCurrentId }) => {
     }
   };
 
-  if (!user?.result?.name) {
-    return (
-      <Paper className={classes.paper}>
-        <Typography variant="h6" align="center">
-          Please Sign In to participate in the Watchlist
-        </Typography>
-      </Paper>
-    );
-  }
   const clear = () => {
     setCurrentId(0);
     setPostData({
@@ -58,7 +49,7 @@ const Form = ({ currentId, setCurrentId }) => {
   };
 
   return (
-    <Paper className={classes.paper}>
+    <Paper className={currentId ? `${classes.paper}` : `${classes.empty}`}>
       <form
         autoComplete="off"
         noValidate
@@ -70,24 +61,6 @@ const Form = ({ currentId, setCurrentId }) => {
         </Typography>
 
         <TextField
-          name="title"
-          variant="outlined"
-          label="title"
-          fullWidth
-          value={postData.title}
-          onChange={(e) => setPostData({ ...postData, title: e.target.value })}
-        />
-        <TextField
-          name="synopsis"
-          variant="outlined"
-          label="synopsis"
-          fullWidth
-          value={postData.synopsis}
-          onChange={(e) =>
-            setPostData({ ...postData, synopsis: e.target.value })
-          }
-        />
-        <TextField
           name="tags"
           variant="outlined"
           label="tags"
@@ -98,13 +71,6 @@ const Form = ({ currentId, setCurrentId }) => {
           }
         />
         <div className={classes.fileInput}>
-          {/* <FileBase
-            type="file"
-            multiple={false}
-            onDone={({ base64 }) =>
-              setPostData({ ...postData, imageUrl: base64 })
-            }
-          /> */}
           <Button
             className={classes.buttonSubmit}
             variant="contained"
